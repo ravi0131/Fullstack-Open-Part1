@@ -32,18 +32,12 @@ const App = () => {
     </div>
   )
 } 
+const Display = ({ counter }) => <div>{counter}</div>
 
-const Display = (props) => {
+const Button = ({onButtonClick,text}) => {
   return (
-    <div>
-      {props.counter}
-    </div>
-  )
-}
-const Button = (props) => {
-  return (
-    <button onClick={props.onClick}>
-      {props.text}
+    <button onClick={onButtonClick}>
+      {text}
     </button>
   )
 }
