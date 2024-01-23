@@ -24,10 +24,11 @@ const App = () => {
   return (
     <div>
       {left}
-      <button onClick={handleLeftClick}>left</button>
-      <button onClick={handleRightClick}>right</button>
+      <Button onButtonClick={handleLeftClick} text = 'left'/>
+      <Button onButtonClick={handleRightClick} text ='right'/>
       {right}
       <History allClicks = {allClicks}/>
+      Total:{total}
     </div>
   )
 }
