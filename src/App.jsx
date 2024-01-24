@@ -1,59 +1,97 @@
 import { useState } from 'react'
 
 const App = () => {
-  const [left, setLeft] = useState(0)
-  const [right, setRight] = useState(0)
-  const [allClicks, setAll] = useState([])
-
+  // save clicks of each button to its own state
+  const [good, setGood] = useState(0)
+  const [neutral, setNeutral] = useState(0)
+  const [bad, setBad] = useState(0)
   const [total, setTotal] = useState(0)
+  const [average, setAverage] = useState(0)
+  const [positivePercentage, setPositivePercentage] = useState(0)
 
-  const handleLeftClick = () => {
-    setAll(allClicks.concat('L'))
-    const updatedLeft = left + 1
-    setLeft(updatedLeft)
-    setTotal(updatedLeft + right)
+  const calculateAvg = (good, neutral, bad, total)=>{
+    console.log('Hello form the calculateAvg')
+    const weightedSum = (good*1) + (neutral*0) + (bad*-1)
+    const aveargeVal = weightedSum/total
+    setAverage(aveargeVal)
   }
 
-  const handleRightClick = () => {
-    setAll(allClicks.concat('R'))
-    const updatedRight = right +1
-    setRight(updatedRight)
-    setTotal(left + updatedRight)
+  const calculatePercentage = (positive,total) =>{
+    console.log('Hello from the calculatePercentage')
+    
+    const update = (positive/total) * 100
+    setPositivePercentage(update)
   }
+
+  const goodButtonClick = () => {
+    console.log('hello from goodButtonClick')
+    
+    const updatedGood = good + 1
+    const updatedTotal = total + 1
+    
+    setGood(updatedGood)
+    setTotal(updatedTotal)
+    
+    calculateAvg(updatedGood,neutral,bad,updatedTotal)
+    calculatePercentage(updatedGood,updatedTotal)
+}
+const neutralButtonClick = () =>{
+  console.log('Hello from the neutralButtonClick')
+  
+  const updatedNeutral = neutral+1
+  const updatedTotal = total+1
+  
+  setNeutral(updatedNeutral)
+  setTotal(updatedTotal)
+  
+  calculateAvg(good, updatedNeutral, bad, updatedTotal)
+  calculatePercentage(good, updatedTotal)
+}
+
+const badButtonClick = () =>{
+  console.log('Hello from the badButtonClick')
+  
+  const updatedBad = bad+1
+  const updatedTotal = total+1
+  
+  setBad(updatedBad)
+  setTotal(updatedTotal)
+  
+  calculateAvg(good,neutral,updatedBad,updatedTotal)
+  calculatePercentage(good,updatedTotal)
+}
 
   return (
     <div>
-      {left}
-      <Button onButtonClick={handleLeftClick} text = 'left'/>
-      <Button onButtonClick={handleRightClick} text ='right'/>
-      {right}
-      <History allClicks = {allClicks}/>
-      Total:{total}
+      <Header title = 'give Feedback'/>
+      <Button onClick = {goodButtonClick} text = {'good'} />
+      <Button onClick = {neutralButtonClick} text = {'neutral'} />
+      <Button onClick = {badButtonClick} text = {'bad'} />
+      <Header title='statistics'/>
+      <p>good: {good}</p>
+      <p>neutral: {neutral}</p>
+      <p>bad: {bad}</p>
+      <p>all: {total}</p>
+      <p>average: {average}</p>
+      <p>positive: {positivePercentage}</p>
     </div>
   )
 }
-const History = (props) =>{
-  if(props.allClicks.length == 0){
-    return(
-      <div>
-        the app is used by pressing buttons
-      </div>
-    )
-  }
+
+const Header = ({title}) =>{
   return(
-    <div>
-      button press history: {props.allClicks.join(' ')}
-    </div>
+    <h2>
+      {title}
+    </h2>
   )
 }
 
-const Display = ({ counter }) => <div>{counter}</div>
-
-const Button = ({onButtonClick,text}) => {
-  return (
-    <button onClick={onButtonClick}>
+const Button = ({onClick, text}) =>{
+  return(
+    <button onClick={onClick}>
       {text}
     </button>
   )
 }
+
 export default App
