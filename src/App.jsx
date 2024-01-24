@@ -76,19 +76,17 @@ const badButtonClick = () =>{
 const StatisticLine = (props) => {
   if(props.label == 'Percentage'){
     return(
-      <div>
-        <p>
-          {props.label}: {props.value}%
-        </p>
-      </div>
+        <tr>
+          <td>{props.label}</td>
+          <td>{props.value}%</td>
+        </tr>
     )
   } 
   return(
-    <div>
-      <p>
-        {props.label}: {props.value}
-      </p>
-    </div>
+      <tr>
+        <td>{props.label}</td>
+        <td>{props.value}</td>
+      </tr>
   )
 }
 const Statistics = (props) =>{
@@ -101,14 +99,16 @@ const Statistics = (props) =>{
     )
   }
   return (
-    <div>
-      <StatisticLine label={'Good'} value={props.good}/>
-      <StatisticLine label={'Neutral'} value={props.neutral}/>
-      <StatisticLine label={'Bad'} value={props.bad}/>
-      <StatisticLine label={'All'} value={props.all}/>
-      <StatisticLine label={'Average'} value={props.average}/>
-      <StatisticLine label={'Percentage'} value={props.positivePercentage}/>
-    </div>
+      <table>
+        <tbody>
+          <StatisticLine label={'Good'} value={props.good}/>
+          <StatisticLine label={'Neutral'} value={props.neutral}/>
+          <StatisticLine label={'Bad'} value={props.bad}/>
+          <StatisticLine label={'All'} value={props.all}/>
+          <StatisticLine label={'Average'} value={props.average}/>
+          <StatisticLine label={'Percentage'} value={props.positivePercentage}/>
+        </tbody>
+      </table>
   )
 }
 
