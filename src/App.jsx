@@ -68,12 +68,22 @@ const badButtonClick = () =>{
       <Button onClick = {neutralButtonClick} text = {'neutral'} />
       <Button onClick = {badButtonClick} text = {'bad'} />
       <Header title='statistics'/>
-      <p>good: {good}</p>
-      <p>neutral: {neutral}</p>
-      <p>bad: {bad}</p>
-      <p>all: {total}</p>
-      <p>average: {average}</p>
-      <p>positive: {positivePercentage}</p>
+      <Statistics 
+        good={good} neutral={neutral} bad={bad} all={total} average={average} positivePercentage={positivePercentage}/>
+    </div>
+  )
+}
+
+const Statistics = (props) =>{
+  console.log('Hello from statistics component')
+  return (
+    <div>
+      <p>good: {props.good}</p>
+      <p>neutral: {props.neutral}</p>
+      <p>bad: {props.bad}</p>
+      <p>all: {props.all}</p>
+      <p>average: {props.average}</p>
+      <p>positivePercentage: {props.positivePercentage}%</p>
     </div>
   )
 }
