@@ -73,7 +73,24 @@ const badButtonClick = () =>{
     </div>
   )
 }
-
+const StatisticLine = (props) => {
+  if(props.label == 'Percentage'){
+    return(
+      <div>
+        <p>
+          {props.label}: {props.value}%
+        </p>
+      </div>
+    )
+  } 
+  return(
+    <div>
+      <p>
+        {props.label}: {props.value}
+      </p>
+    </div>
+  )
+}
 const Statistics = (props) =>{
   console.log('Hello from statistics component')
   if(props.all == 0){
@@ -85,12 +102,12 @@ const Statistics = (props) =>{
   }
   return (
     <div>
-      <p>good: {props.good}</p>
-      <p>neutral: {props.neutral}</p>
-      <p>bad: {props.bad}</p>
-      <p>all: {props.all}</p>
-      <p>average: {props.average}</p>
-      <p>positivePercentage: {props.positivePercentage}%</p>
+      <StatisticLine label={'Good'} value={props.good}/>
+      <StatisticLine label={'Neutral'} value={props.neutral}/>
+      <StatisticLine label={'Bad'} value={props.bad}/>
+      <StatisticLine label={'All'} value={props.all}/>
+      <StatisticLine label={'Average'} value={props.average}/>
+      <StatisticLine label={'Percentage'} value={props.positivePercentage}/>
     </div>
   )
 }
